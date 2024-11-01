@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+}
+
+.wrap {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ef9c50;
+}
+.wrap .qrcodeConatiner {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.wrap .qrcodeConatiner img {
+  width: 35%;
+}
+.wrap .numberScansContainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .numberScansContainer h2 {
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  color: #fff;
+}
+.wrap .numberScansContainer .numberScans {
+  font-size: 3.5rem;
+  background-color: #51351b;
+  width: 450px;
+  height: 100px;
+  margin-bottom: 50px;
+  color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 30px;
+  border-radius: 20px;
+}/*# sourceMappingURL=style.css.map */
