@@ -16,6 +16,7 @@
     "express-device": "^0.4.2",
     "mongoose": "^8.8.0",
     "path": "^0.12.7",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
   }
 }

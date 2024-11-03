@@ -10,9 +10,9 @@ fpPromise
         axios.post(`/scanQr`, { visitorId })
             .then(res => {
                 console.log(res)
-                window.location.href = "/rating"
             })
             .catch(err => {
                 console.log(err)
             })
+        window.location.href = "/rating"
     })
