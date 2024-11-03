@@ -34,7 +34,7 @@ mongoose.connect(process.env.MONGODB_URI)
         console.log(err);
     })
 
-qr.toFile('./public/qrcode.png', 'https://qr-project-p198.onrender.com/scanQr', function (err) {
+qr.toFile('./public/qrcode.png', 'https://qr-project-p198.onrender.com/scan', function (err) {
     if (err) throw err;
     console.log('QR Code saved!');
 });
