@@ -90,17 +90,10 @@ app.post(`/scanQr`, async (req, res) => {
             res.json({ message: "First scan recorded" });
         } else {
             const lastVisit = user.visitorHistory[user.visitorHistory.length - 1].time;
-            const beforeLastVisit = user.visitorHistory.length > 1
-                ? user.visitorHistory[user.visitorHistory.length - 2].time
-                : null;
-
             const lastVisitDate = lastVisit.toISOString().slice(0, lastVisit.toISOString().indexOf("T"));
-            const beforeLastVisitDate = beforeLastVisit
-                ? beforeLastVisit.toISOString().slice(0, beforeLastVisit.toISOString().indexOf("T"))
-                : null;
 
-            if (lastVisitDate !== beforeLastVisitDate && beforeLastVisitDate !== null) {
-                numberOfScansModel.updateOne({}, { $inc: { numberOfScans: 1 } }, { upsert: true });
+            if (lastVisitDate !== new Date().toISOString().slice(0, new Date().toISOString().indexOf("T"))) {
+                await numberOfScansModel.updateOne({}, { $inc: { numberOfScans: 1 } }, { upsert: true });
                 const numberOfScans = await numberOfScansModel.findOne({});
                 io.emit('scanUpdate', numberOfScans);
 
@@ -119,7 +112,7 @@ app.post(`/scanQr`, async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });
     }
-});
+}); 
 
 app.get(`/getScans`, async (req, res) => {
     const numberOfScans = await numberOfScansModel.findOne({});

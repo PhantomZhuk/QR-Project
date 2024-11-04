@@ -6,5 +6,5 @@ axios.get(`/getScans`)
     })
 
 socket.on('scanUpdate', (updatedScans) => {
-    $(`.numberScans`).text(updatedScans)
+    $(`.numberScans`).text(updatedScans.numberOfScans)
 });
