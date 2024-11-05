@@ -44,14 +44,6 @@ const client = new FingerprintJsServerApiClient({
     region: Region.EU,
 })
 
-const userSchema = new mongoose.Schema({
-    visitorId: { type: String, required: true },
-    visitorHistory: [{ time: { type: Date, required: true } }],
-    userNumberOfScans: { type: Number, default: 0 }
-});
-
-const User = mongoose.model("User", userSchema);
-
 const numberOfScansSchena = new mongoose.Schema({
     numberOfScans: { type: Number, default: 0 }
 })
@@ -68,6 +60,20 @@ async function checkAndInitializeNumberOfScans() {
 }
 
 checkAndInitializeNumberOfScans();
+
+app.get(`/getScans`, async (req, res) => {
+    const numberOfScans = await numberOfScansModel.findOne({});
+    res.json({ numberOfScans });
+})
+
+const userSchema = new mongoose.Schema({
+    visitorId: { type: String, required: true },
+    visitorHistory: [{ time: { type: Date, required: true } }],
+    userNumberOfScans: { type: Number, default: 0 }
+});
+
+const User = mongoose.model("User", userSchema);
+
 
 app.post(`/scanQr`, async (req, res) => {
     const { visitorId } = req.body;
@@ -114,9 +120,9 @@ app.post(`/scanQr`, async (req, res) => {
     }
 }); 
 
-app.get(`/getScans`, async (req, res) => {
-    const numberOfScans = await numberOfScansModel.findOne({});
-    res.json({ numberOfScans });
+app.get(`/getUsers`, async (req, res) => {
+    const users = await User.find({});
+    res.json({ users });
 })
 
 server.listen(PORT, () => {
