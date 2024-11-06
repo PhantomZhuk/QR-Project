@@ -26,6 +26,10 @@ app.get(`/rating`, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "rating", "index.html"));
 })
 
+app.get(`/adminAuth`, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "admin", "login", "index.html"));
+})
+
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log(`MongoDB connected`);
@@ -51,7 +55,7 @@ const numberOfScansSchena = new mongoose.Schema({
 const numberOfScansModel = mongoose.model("numberOfScans", numberOfScansSchena);
 
 async function checkAndInitializeNumberOfScans() {
-    const isNumberOfScans = await numberOfScansModel.findOne({}); 
+    const isNumberOfScans = await numberOfScansModel.findOne({});
 
     if (!isNumberOfScans) {
         const newNumberOfScans = new numberOfScansModel({ numberOfScans: 0 });
@@ -73,7 +77,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
-
 
 app.post(`/scanQr`, async (req, res) => {
     const { visitorId } = req.body;
@@ -118,11 +121,36 @@ app.post(`/scanQr`, async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });
     }
-}); 
+});
 
 app.get(`/getUsers`, async (req, res) => {
     const users = await User.find({});
+    io.emit('users', users);
     res.json({ users });
+})
+
+const AdminSchema = new mongoose.Schema({
+    login: { type: String, required: true },
+    password: { type: String, required: true }
+});
+
+const Admin = mongoose.model(`Admin`, AdminSchema);
+
+app.post(`/admin/login`, async (req, res) => {
+    const { adminName, password } = req.body;
+    if (adminName && password) {
+        const login = await Admin.findOne({ adminName })
+        const password = await Admin.findOne({ password })
+        if (login){
+            if (password) {
+                res.json({ message: `Admin logged in` });
+            }else {
+                res.json({message: `Worng admin password`})
+            }
+        }else {
+            res.json({ message: `Worng admin name`});
+        }
+    }
 })
 
 server.listen(PORT, () => {
