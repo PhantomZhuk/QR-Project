@@ -9,10 +9,13 @@ const http = require('http');
 const { Server } = require('socket.io');
 const server = http.createServer(app);
 const io = new Server(server);
+const jwt = require(`jsonwebtoken`);
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/admin/auth', express.static(path.join(__dirname, 'public', 'admin', 'auth')));
+app.use('/admin/home', express.static(path.join(__dirname, 'public', 'admin', 'home')));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -26,9 +29,17 @@ app.get(`/rating`, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "rating", "index.html"));
 })
 
-app.get(`/adminAuth`, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "admin", "login", "index.html"));
+app.get(`/admin/auth`, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "admin", "auth", "index.html"));
 })
+
+app.get(`/admin`, (req, res) => {
+    res.redirect('/admin/auth');
+})
+
+app.get(`/admin/home`, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "admin", "auth", "index.html"));
+});
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
@@ -139,19 +150,33 @@ const Admin = mongoose.model(`Admin`, AdminSchema);
 app.post(`/admin/login`, async (req, res) => {
     const { adminName, password } = req.body;
     if (adminName && password) {
-        const login = await Admin.findOne({ adminName })
-        const password = await Admin.findOne({ password })
-        if (login){
-            if (password) {
-                res.json({ message: `Admin logged in` });
-            }else {
-                res.json({message: `Worng admin password`})
+        const admin = await Admin.findOne({ login: adminName, password })
+        if (admin.login === adminName) {
+            if (admin.password === password) {
+                const token = jwt.sign({ login: adminName, password}, process.env.JWT_SECRET, { expiresIn: '1d' });
+                res.json({ token, message: `Admin logged in` });
+            } else {
+                res.json({ message: `Worng admin password` })
             }
-        }else {
-            res.json({ message: `Worng admin name`});
+        } else {
+            res.json({ message: `Worng admin name` });
         }
     }
 })
+
+function authenticateToken(req, res, next) {
+    const token = req.headers[`authorization`] && req.headers[`authorization`].split(` `)[1];
+    if (token == null) return res.sendStatus(401);
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    })
+}
+
+app.get('/protected', authenticateToken, (req, res) => {
+    res.json({ message: 'This is a secure route', user: req.user });
+});
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
