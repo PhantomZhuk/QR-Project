@@ -16,12 +16,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/admin/auth', express.static(path.join(__dirname, 'public', 'admin', 'auth')));
 app.use('/admin/home', express.static(path.join(__dirname, 'public', 'admin', 'home')));
+app.use('/getUserId', express.static(path.join(__dirname, 'public', 'scan')));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.get(`/scan`, async (req, res) => {
+app.get(`/scan`, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "scan", "index.html"));
 })
 
@@ -39,6 +40,23 @@ app.get(`/admin`, (req, res) => {
 
 app.get(`/admin/home`, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "admin", "auth", "index.html"));
+});
+
+app.get(`/home`, (req, res) => {
+    if (req.query.userId) {
+        const userId = req.query.userId;
+        res.redirect(`/home/${userId}`);
+    } else {
+        res.redirect(`/getUserId`);
+    }
+});
+
+app.get(`/getUserId`, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "scan", "index.html"));
+});
+
+app.get(`/home/:userId`, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "userHome", "index.html"));
 });
 
 mongoose.connect(process.env.MONGODB_URI)

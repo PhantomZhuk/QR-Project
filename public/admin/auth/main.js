@@ -7,7 +7,7 @@ axios.get(`/protected`, {
     if (res.data.message === `This is a secure route`){
         window.location.href = `/admin/home`
     }else {
-        console.log(res.data.message);
+        window.location.href = `/admin/auth`
     }
 })
 
