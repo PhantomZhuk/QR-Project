@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/admin/auth', express.static(path.join(__dirname, 'public', 'admin', 'auth')));
 app.use('/admin/home', express.static(path.join(__dirname, 'public', 'admin', 'home')));
 app.use('/getUserId', express.static(path.join(__dirname, 'public', 'scan')));
+app.use('/home/:id', express.static(path.join(__dirname, 'public', 'userHome')));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
