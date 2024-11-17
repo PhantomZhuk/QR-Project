@@ -10,17 +10,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: #ef9c50;
 
     .spinnerContainer {
         width: 300px;
         height: 300px;
-        box-shadow: 0 0 5px 3px #588157;
+        box-shadow: 0 0 5px 3px #51351b;
         border-radius: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #588157;
+        background-color: #51351b;
 
         .spin {
             width: 90%;
@@ -39,12 +39,12 @@
     .doneContainer {
         width: 300px;
         height: 300px;
-        box-shadow: 0 0 5px 3px #588157;
+        box-shadow: 0 0 5px 3px #354d34;
         border-radius: 20px;
         display: none;
         justify-content: center;
         align-items: center;
-        background-color: #588157;
+        background-color: #354d34;
 
         .animate {
             width: 100%;

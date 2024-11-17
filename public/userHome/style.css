@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  background-color: #ef9c50;
 }
 .wrap .numberOfScansContainer {
   width: 100%;
@@ -26,8 +26,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  background-color: #588157;
-  box-shadow: 0 0 5px 3px #588157;
+  background-color: #51351b;
+  box-shadow: 0 0 5px 3px #51351b;
 }
 .wrap .numberOfScansContainer .numberOfScansBox .numberOfScan {
   font-size: 3rem;
@@ -47,9 +47,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #3a5a40;
+  background-color: #774e27;
   font-size: 2rem;
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 0 5px 3px #3a5a40;
+  box-shadow: 0 0 5px 3px #774e27;
 }/*# sourceMappingURL=style.css.map */
