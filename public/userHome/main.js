@@ -17,3 +17,22 @@ function checkUser() {
 }
 
 checkUser();
+
+axios.get(`/getUsers`)
+    .then((res) => {
+        res.data.users.forEach(user => {
+            if (user.visitorId === window.location.pathname.split(`/`).filter(segment => segment).pop()) {
+                if (user.userNumberOfScans === 1) {
+                    $(`.numberOfScan`).text(user.userNumberOfScans + ` Scan`);
+                } else if (user.userNumberOfScans > 1) {
+                    $(`.numberOfScan`).text(user.userNumberOfScans + ` Scans`);
+                } else {
+                    $(`.numberOfScan`).text(user.userNumberOfScans + ` Scan`);
+                }
+            }
+        })
+    })
+
+$(`#shopBtn`).click(() => { 
+    window.location.href = `/shop/${window.location.pathname.split(`/`).filter(segment => segment).pop()}`;
+})
