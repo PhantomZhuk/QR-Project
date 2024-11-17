@@ -18,6 +18,7 @@ app.use('/admin/auth', express.static(path.join(__dirname, 'public', 'admin', 'a
 app.use('/admin/home', express.static(path.join(__dirname, 'public', 'admin', 'home')));
 app.use('/getUserId', express.static(path.join(__dirname, 'public', 'scan')));
 app.use('/home/:id', express.static(path.join(__dirname, 'public', 'userHome')));
+app.use('/shop/:id', express.static(path.join(__dirname, 'public', 'shop')));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -59,6 +60,19 @@ app.get(`/getUserId`, (req, res) => {
 app.get(`/home/:userId`, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "userHome", "index.html"));
 });
+
+app.get(`/shop`, (req, res) => {
+    if (req.query.userId) {
+        const userId = req.query.userId;
+        res.redirect(`/shop/${userId}`);
+    }else {
+        res.redirect(`/getUserId`);
+    }
+})
+
+app.get(`/shop/:userId`, (req, res) => { 
+    res.sendFile(path.join(__dirname, "public", "shop", "index.html"));
+})
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
@@ -172,7 +186,7 @@ app.post(`/admin/login`, async (req, res) => {
         const admin = await Admin.findOne({ login: adminName, password })
         if (admin.login === adminName) {
             if (admin.password === password) {
-                const token = jwt.sign({ login: adminName, password}, process.env.JWT_SECRET, { expiresIn: '1d' });
+                const token = jwt.sign({ login: adminName, password }, process.env.JWT_SECRET, { expiresIn: '1d' });
                 res.json({ token, message: `Admin logged in` });
             } else {
                 res.json({ message: `Worng admin password` })
