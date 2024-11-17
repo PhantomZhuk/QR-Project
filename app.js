@@ -10,6 +10,7 @@ const { Server } = require('socket.io');
 const server = http.createServer(app);
 const io = new Server(server);
 const jwt = require(`jsonwebtoken`);
+const multer = require(`multer`);
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -210,6 +211,17 @@ function authenticateToken(req, res, next) {
 app.get('/protected', authenticateToken, (req, res) => {
     res.json({ message: 'This is a secure route', user: req.user });
 });
+
+const productSchema = new mingoose.Schema({
+    name: { type: String, required: true},
+    price: { type: Number, required: true },
+    filename: { type: String, required: true },
+    path: { type: String, required: true }
+})
+
+const Product = mongoose.model(`Product`, productSchema);
+
+
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
