@@ -15,11 +15,29 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js'
         integrity='sha512-aUhL2xOCrpLEuGD5f6tgHbLYEXRpYZ8G5yD+WlFrXrPy2IrWBlu6bih5C9H6qGsgqnU6mgx6KtU8TreHpASprw=='
         crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css'
+        integrity='sha512-8BU3emz11z9iF75b10oPjjpamM4Mz23yQFQymbtwyPN3mNWHxpgeqyrYnkIUP6A8KyAj5k2p3MiYLtYqew7gIw=='
+        crossorigin='anonymous' />
 </head>
 
 <body>
     <div class="wrap">
-        <h1>Admin</h1>
+        <header>
+            <ul class="nav">
+                <li id="marketBtn" class="selectedPage">Market</li>
+                <li id="ordersBtn">Orders</li>
+            </ul>
+        </header>
+        <main class="marketContainer">
+            <div class="headerContainer">
+                <div class="searchContainer">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                    <div class="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </div>
+                <div class="addProductBtn"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="productsContainer"></div>
+        </main>
     </div>
     <script src="./main.js"></script>
 </body>

@@ -212,7 +212,7 @@ app.get('/protected', authenticateToken, (req, res) => {
     res.json({ message: 'This is a secure route', user: req.user });
 });
 
-const productSchema = new mingoose.Schema({
+const productSchema = new mongoose.Schema({
     name: { type: String, required: true},
     price: { type: Number, required: true },
     filename: { type: String, required: true },
@@ -221,7 +221,24 @@ const productSchema = new mingoose.Schema({
 
 const Product = mongoose.model(`Product`, productSchema);
 
+const orderSchema = new mongoose.Schema({
+    userId: { type: String, required: true},
+    products: { type: Array, required: true },
+    date: { type: Date, required: true }
+})
 
+const Order = mongoose.model(`Order`, orderSchema);
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/shop/uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
