@@ -22,7 +22,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   list-style: none;
   padding: 50px 0 20px 0;
 }
@@ -35,14 +35,20 @@
   font-size: 2rem;
   color: #fff;
   cursor: pointer;
-  margin-left: 12px;
   border-radius: 10px 0 0 10px;
   margin-bottom: 10px;
 }
 .wrap header .nav .selectedPage {
   background-color: #ef9c50;
 }
-.wrap .marketContainer {
+.wrap main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrap main .marketContainer {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -50,7 +56,7 @@
   align-items: center;
   padding-top: 20px;
 }
-.wrap .marketContainer .headerContainer {
+.wrap main .marketContainer .headerContainer {
   width: 90%;
   height: 75px;
   display: flex;
@@ -60,13 +66,13 @@
   background-color: #774e27;
   border-radius: 10px;
 }
-.wrap .marketContainer .headerContainer .searchContainer {
+.wrap main .marketContainer .headerContainer .searchContainer {
   width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.wrap .marketContainer .headerContainer .searchContainer input {
+.wrap main .marketContainer .headerContainer .searchContainer input {
   width: 250px;
   height: 40px;
   border-radius: 10px;
@@ -76,13 +82,13 @@
   outline: none;
   color: #fff;
 }
-.wrap .marketContainer .headerContainer .searchContainer input::-moz-placeholder {
+.wrap main .marketContainer .headerContainer .searchContainer input::-moz-placeholder {
   color: #fff;
 }
-.wrap .marketContainer .headerContainer .searchContainer input::placeholder {
+.wrap main .marketContainer .headerContainer .searchContainer input::placeholder {
   color: #fff;
 }
-.wrap .marketContainer .headerContainer .searchContainer .searchBtn {
+.wrap main .marketContainer .headerContainer .searchContainer .searchBtn {
   width: 40px;
   height: 40px;
   border-radius: 10px;
@@ -94,7 +100,7 @@
   align-items: center;
   color: #fff;
 }
-.wrap .marketContainer .headerContainer .addProductBtn {
+.wrap main .marketContainer .headerContainer .addProductBtn {
   width: 50px;
   height: 50px;
   display: flex;
@@ -105,11 +111,18 @@
   background-color: #9d6733;
   border-radius: 10px;
 }
-.wrap .marketContainer .productContainer {
+.wrap main .marketContainer .productContainer {
   width: 90%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+.wrap main .ordersContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */

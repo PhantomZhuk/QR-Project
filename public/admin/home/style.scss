@@ -22,7 +22,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
             list-style: none;
             padding: 50px 0 20px 0;
 
@@ -35,7 +35,6 @@
                 font-size: 2rem;
                 color: #fff;
                 cursor: pointer;
-                margin-left: 12px;
                 border-radius: 10px 0 0 10px;
                 margin-bottom: 10px;
             }
@@ -43,86 +42,98 @@
             .selectedPage {
                 background-color: #ef9c50;
             }
-
-            // li:hover {
-            //     background-color: #51351b;
-            // }
         }
     }
 
-    .marketContainer {
+    main {
         width: 100%;
         min-height: 100vh;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding-top: 20px;
 
-        .headerContainer {
-            width: 90%;
-            height: 75px;
+        .marketContainer {
+            width: 100%;
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
-            background-color: #774e27;
-            border-radius: 10px;
+            padding-top: 20px;
 
-            .searchContainer {
-                width: 300px;
+            .headerContainer {
+                width: 90%;
+                height: 75px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                padding: 20px;
+                background-color: #774e27;
+                border-radius: 10px;
 
-                input {
-                    width: 250px;
-                    height: 40px;
-                    border-radius: 10px;
-                    border: none;
-                    padding-left: 10px;
-                    background-color: #9d6733;
-                    outline: none;
-                    color: #fff;
+                .searchContainer {
+                    width: 300px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
 
-                    &::placeholder {
+                    input {
+                        width: 250px;
+                        height: 40px;
+                        border-radius: 10px;
+                        border: none;
+                        padding-left: 10px;
+                        background-color: #9d6733;
+                        outline: none;
+                        color: #fff;
+
+                        &::placeholder {
+                            color: #fff;
+                        }
+                    }
+
+                    .searchBtn {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 10px;
+                        border: none;
+                        background-color: #9d6733;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         color: #fff;
                     }
                 }
 
-                .searchBtn {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 10px;
-                    border: none;
-                    background-color: #9d6733;
-                    cursor: pointer;
+                .addProductBtn {
+                    width: 50px;
+                    height: 50px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     color: #fff;
+                    cursor: pointer;
+                    background-color: #9d6733;
+                    border-radius: 10px;
                 }
             }
 
-            .addProductBtn {
-                width: 50px;
-                height: 50px;
+            .productContainer {
+                width: 90%;
+                min-height: 100vh;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: #fff;
-                cursor: pointer;
-                background-color: #9d6733;
-                border-radius: 10px;
+                margin-top: 20px;
             }
         }
 
-        .productContainer {
-            width: 90%;
+        .ordersContainer {
+            width: 100%;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
+            display: none;
+            flex-direction: column;
             align-items: center;
-            margin-top: 20px;
         }
     }
 }
