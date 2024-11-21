@@ -12,12 +12,25 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.js'
         integrity='sha512-luUnkeG+uabiT2pZdi5ME5uADvq+FpDs2fK5V0nVXrHCND9F077fKaE9W//oJvGnWSmwQmCau63A6s3um1NZmg=='
         crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.css'
+        integrity='sha512-gUmZC4CtgECJeVW1aeRk2AmpdQsl1ABsR8Cp4PmvANxm+TzwNNpe2MoJT/htbYsn0GR9+sIMDrd9vT9Pt0ZANA=='
+        crossorigin='anonymous' />
 </head>
 
 <body>
 
     <div class="wrap">
-        
+        <header>
+            <div class="filterBtn">Filter <i class="fa-solid fa-filter"></i></div>
+            <div class="filterContainer"></div>
+            <div class="searchProductContainer">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <div class="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+        </header>
+        <main>
+            <div class="productsContainer"></div>
+        </main>
     </div>
 
     <script src="./main.js"></script>

@@ -1,0 +1,77 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.wrap {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ef9c50;
+    padding-top: 20px;
+
+    header {
+        width: 90%;
+        height: 75px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #774e27;
+        border-radius: 10px;
+
+        .searchProductContainer {
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            input {
+                width: 250px;
+                height: 40px;
+                border-radius: 10px;
+                border: none;
+                padding-left: 10px;
+                background-color: #9d6733;
+                outline: none;
+                color: #fff;
+
+                &::placeholder {
+                    color: #fff;
+                }
+            }
+
+            .searchBtn {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                border: none;
+                background-color: #9d6733;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+            }
+        }
+
+        .filterBtn {
+            width: 100px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            cursor: pointer;
+            background-color: #9d6733;
+            border-radius: 10px;
+
+            i {
+                margin-left: 10px;
+            }
+        }
+    }
+}
