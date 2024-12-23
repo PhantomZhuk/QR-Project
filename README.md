@@ -1,3 +1,3 @@
 # QR-Project
  
-<img src="./public/img/readmi.png">
+<img src="./img/readmi.png">
